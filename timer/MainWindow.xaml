@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Margin="0">
+        Title="MainWindow" Height="450" Width="800" Margin="0"  Background="#f2f2f2">
     <Window.Resources>
         <ControlTemplate TargetType="Button" x:Key="btn_bright_time">
             <Border BorderBrush="#FF1E2D40"
                     BorderThickness="7" 
-                    Margin="10,30">
+                    Margin="10,20">
                 <ContentControl 
+                                Background="#f2f2f2"
                                 FontSize="70"
                                 FontFamily="Roboto"
                                 VerticalAlignment="Center" HorizontalAlignment="Center"  
@@ -22,7 +23,8 @@
         <ControlTemplate TargetType="Button" x:Key="btn_bright_play">
 
             <Border BorderBrush="#FFD99C2B"
-                    BorderThickness="7" Margin="10,30">
+                    BorderThickness="7" Margin="10,20">
+
                 <Polyline Fill="#FFD99C2B" Points="20,10, 
                                                    75,50,
                                                    20,75"/>
@@ -31,8 +33,8 @@
         </ControlTemplate>
 
         <ControlTemplate TargetType="TextBox" x:Key="txt_bright">
-            
-            <ContentControl FontSize="175"
+
+            <ContentControl FontSize="210"
                             FontFamily="Roboto"
                             VerticalAlignment="Center" HorizontalAlignment="Center"  
                             Foreground="#FF1E2D40"       
@@ -41,73 +43,100 @@
         </ControlTemplate>
 
         <ControlTemplate TargetType="TextBox" x:Key="text_dots_bright">
-            <ContentControl FontSize="175"
+            <ContentControl FontSize="210"
                             FontFamily="Roboto"
                             VerticalAlignment="Center" HorizontalAlignment="Center"  
                             Foreground="#FF1E2D40"
-                            Width="54"
-                            Content="{TemplateBinding Text}" Margin="-4,0,0,0" AllowDrop="False" />
+                            Content="{TemplateBinding Text}" AllowDrop="False" />
+
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="TextBox" x:Key="tabs_bright">
+
+            <ContentControl FontSize="40"
+                            FontFamily="Roboto"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"  
+                            Foreground="#FF1E2D40"
+                            Content="{TemplateBinding Text}" AllowDrop="False" />
         </ControlTemplate>
 
     </Window.Resources>
+    <TabControl x:Name="Functions" BorderBrush="{x:Null}" Background="{x:Null}" >
+        <TabItem x:Name="Timer" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
+            <TabItem.Header>
+                <StackPanel x:Name="TabPanel1">
+                    <TextBox Text="Timer" x:Name="btn_tab_1" 
+                    Template="{StaticResource tabs_bright}" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                </StackPanel>
+            </TabItem.Header>
+            <Grid x:Name="MainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="0.75*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-    <Grid x:Name="MainGrid" ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="1.5*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="0.75*" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <Button x:Name="btn_ui_play" Grid.Row="0" 
+                <Button x:Name="btn_ui_play" Grid.Row="0" 
                 Content="123"  
                 Grid.Column="0" 
                 Template="{StaticResource btn_bright_play}"/>
-        <Button x:Name="btn_ui_1" Grid.Row="0" Grid.Column="1" 
+                <Button x:Name="btn_ui_1" Grid.Row="0" Grid.Column="1" 
                 Template="{StaticResource btn_bright_time}" Content="5"/>
-        <Button x:Name="btn_ui_2" Grid.Row="0" Grid.Column="2" 
+                <Button x:Name="btn_ui_2" Grid.Row="0" Grid.Column="2" 
                 Template="{StaticResource btn_bright_time}" Content="15"/>
-        <Button x:Name="btn_ui_3" Grid.Row="0" Grid.Column="3" 
+                <Button x:Name="btn_ui_3" Grid.Row="0" Grid.Column="3" 
                 Template="{StaticResource btn_bright_time}" Content="30"/>
-        <Button x:Name="btn_ui_4" Grid.Row="0" Grid.Column="4"
+                <Button x:Name="btn_ui_4" Grid.Row="0" Grid.Column="4"
                 Template="{StaticResource btn_bright_time}" Content="60"/>
 
-        <Grid Grid.ColumnSpan="5" Grid.Row="1" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <TextBox x:Name="main_timer_h" 
-                 Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                 Text="59"
-                 Template="{StaticResource txt_bright}" HorizontalAlignment="Left"/>
-            <TextBox x:Name="main_timer_dots1"
+                <Grid Grid.ColumnSpan="5" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="main_timer_h" 
+                 Grid.Row="1" Grid.Column="0" 
+                 Text="59" 
+                 Template="{StaticResource txt_bright}" CaretBrush="#FF893636"/>
+                    <TextBox x:Name="main_timer_dots1"
                  Grid.Row="1" Grid.Column="1"
                  Text=":"
                  CaretBrush="Black"
-                 Template="{StaticResource text_dots_bright}" HorizontalAlignment="Right"/>
-            <TextBox x:Name="main_timer_m"
-                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                 Template="{StaticResource text_dots_bright}"/>
+                    <TextBox x:Name="main_timer_m"
+                 Grid.Row="1" Grid.Column="2" 
                  Text="59"
-                 Template="{StaticResource txt_bright}" HorizontalAlignment="Left"/>
-            <TextBox x:Name="main_timer_dots2"
+                 Template="{StaticResource txt_bright}" />
+                    <TextBox x:Name="main_timer_dots2"
                  Grid.Row="1" Grid.Column="3"
                  Text=":"
-                 Template="{StaticResource text_dots_bright }" HorizontalAlignment="Left"/>
-            <TextBox x:Name="main_timer_s"
+                 Template="{StaticResource text_dots_bright }"/>
+                    <TextBox x:Name="main_timer_s"
                  Grid.Row="1" Grid.Column="4"
                  Text="59"
-                 Template="{StaticResource txt_bright}" HorizontalAlignment="Right" />
-        </Grid>
-        
-    </Grid>
+                 Template="{StaticResource txt_bright}"/>
+                </Grid>
+
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="StopWatch" BorderBrush="{x:Null}">
+            <TabItem.Header>
+                <TextBox Text="Stopwatch" x:Name="btn_tab_2" 
+                    Template="{StaticResource tabs_bright}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Background="{x:Null}"/>
+            </TabItem.Header>
+            <Grid>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

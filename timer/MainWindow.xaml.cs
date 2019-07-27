@@ -33,7 +33,7 @@ namespace timer
             };
             TextBox[] txts =
             {
-                 main_timer_s,
+                main_timer_s,
                 main_timer_m,
                 main_timer_h
             };
@@ -43,23 +43,38 @@ namespace timer
 
             for (int i = 0; i < 3; i++)
             {
-                txts[i].TextChanged += UiTxtChange;
                 txts[i].MaxLength = 2;
                 txts[i].MaxLines = 1;
             }
             btn_ui_play.Click += UiBtnStartClick;
 
-            main_timer_s.TextChanged += UiTxtChange;
-            main_timer_m.TextChanged += UiTxtChange;
-            main_timer_h.TextChanged += UiTxtChange;
-
             main_timer_dots1.IsReadOnly = true;
             main_timer_dots2.IsReadOnly = true;
+
+            btn_tab_1.MouseLeftButtonUp += UiBtnTabClick;
+            btn_tab_2.MouseLeftButtonUp += UiBtnTabClick;
+
+            btn_tab_1.Background = new SolidColorBrush(Color.FromRgb(20,202,20));
 
             DispatcherTimer Timer = new DispatcherTimer();
             Timer.Tick += new EventHandler(TimerTick);
             Timer.Interval= new TimeSpan(0, 0, 1);
             Timer.Start();
+        }
+
+        void UiBtnTabClick(object sender, RoutedEventArgs args)
+        {
+            if (Functions.SelectedItem == StopWatch)
+            {
+                Functions.SelectedItem = Timer;
+                btn_tab_1.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }
+            else
+            {
+                Functions.SelectedItem = StopWatch;
+                btn_tab_2.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+
+            }
         }
 
         void UiBtnClick(object sender, RoutedEventArgs args)
@@ -111,28 +126,51 @@ namespace timer
             }
             else
             {
+                TextBox[] txts =
+                {
+                main_timer_s,
+                main_timer_m,
+                main_timer_h
+                };
+
+                for(int i = 0; i < 3; i++)
+                {
+                    if (txts[i].Text.Length == 0)
+                        txts[i].Text = "00";
+                    else if (txts[i].Text.Length == 1)
+                        txts[i].Text = "0" + txts[i].Text;
+                    if (Convert.ToInt32(txts[i].Text) > 59)
+                        txts[i].Text = "59";
+                }
+                if (Convert.ToInt32(txts[2].Text) > 23)
+                    txts[2].Text = "23";
                 is_time_goes = true;
             }
         }
 
-        void UiTxtChange(object sender, RoutedEventArgs args)
-        {
-            if (((TextBox)sender).Text.Length == 1)
-                ((TextBox)sender).Text = "0" + ((TextBox)sender).Text;
-            else if (((TextBox)sender).Text.Length == 0)
-                ((TextBox)sender).Text = "00";
-        }
-
         string[] DateToStringFormat(DateTime t)
         {
-            string[] time =
+            string[] time;
+            if (t.ToLongTimeString().Substring(1, 1) == ":")
             {
-                t.ToLongTimeString().Substring(0,1), 
-                t.ToLongTimeString().Substring(2,2),
-                t.ToLongTimeString().Substring(5,2)
-                // 01:34:57
                 // 0:23:56
-            };
+                time = new string[]
+                {
+                    t.ToLongTimeString().Substring(0,1),
+                    t.ToLongTimeString().Substring(2,2),
+                    t.ToLongTimeString().Substring(5,2)
+                };
+            }
+            else
+            {
+                // 01:34:57
+                time = new string[]
+                {
+                    t.ToLongTimeString().Substring(0,2),
+                    t.ToLongTimeString().Substring(3,2),
+                    t.ToLongTimeString().Substring(6,2)
+                };
+            }
             return time;
         }
 
