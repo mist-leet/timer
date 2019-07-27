@@ -1,0 +1,15 @@
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\bin\Debug\timer.exe.config
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\bin\Debug\timer.exe
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\bin\Debug\timer.pdb
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.csprojAssemblyReference.cache
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\MainWindow.g.cs
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\App.g.cs
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer_MarkupCompile.cache
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer_MarkupCompile.lref
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\MainWindow.baml
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.g.resources
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.Properties.Resources.resources
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.csproj.GenerateResource.cache
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.csproj.CoreCompileInputs.cache
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.exe
+C:\Users\Илюха\Desktop\programming\cs19\timer\timer\timer\obj\Debug\timer.pdb

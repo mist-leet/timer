@@ -5,8 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" Margin="0">
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btn_bright_time">
+            <Border BorderBrush="#FF1E2D40"
+                    BorderThickness="7" 
+                    Margin="10,30">
+                <ContentControl 
+                                FontSize="70"
+                                FontFamily="Roboto"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"  
+                                Foreground="#FF1E2D40" Content="{TemplateBinding Content}"/>
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="btn_bright_play">
+
+            <Border BorderBrush="#FFD99C2B"
+                    BorderThickness="7" Margin="10,30">
+                <Polyline Fill="#FFD99C2B" Points="20,10, 
+                                                   75,50,
+                                                   20,75"/>
+            </Border>
+
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="TextBox" x:Key="txt_bright">
+            
+            <ContentControl FontSize="175"
+                            FontFamily="Roboto"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"  
+                            Foreground="#FF1E2D40"       
+                            
+                Content="{TemplateBinding Text}" Margin="0"/>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="TextBox" x:Key="text_dots_bright">
+            <ContentControl FontSize="175"
+                            FontFamily="Roboto"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"  
+                            Foreground="#FF1E2D40"
+                            Width="54"
+                            Content="{TemplateBinding Text}" Margin="-4,0,0,0" AllowDrop="False" />
+        </ControlTemplate>
+
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid" ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="0.75*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="btn_ui_play" Grid.Row="0" 
+                Content="123"  
+                Grid.Column="0" 
+                Template="{StaticResource btn_bright_play}"/>
+        <Button x:Name="btn_ui_1" Grid.Row="0" Grid.Column="1" 
+                Template="{StaticResource btn_bright_time}" Content="5"/>
+        <Button x:Name="btn_ui_2" Grid.Row="0" Grid.Column="2" 
+                Template="{StaticResource btn_bright_time}" Content="15"/>
+        <Button x:Name="btn_ui_3" Grid.Row="0" Grid.Column="3" 
+                Template="{StaticResource btn_bright_time}" Content="30"/>
+        <Button x:Name="btn_ui_4" Grid.Row="0" Grid.Column="4"
+                Template="{StaticResource btn_bright_time}" Content="60"/>
+
+        <Grid Grid.ColumnSpan="5" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox x:Name="main_timer_h" 
+                 Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Text="59"
+                 Template="{StaticResource txt_bright}" HorizontalAlignment="Left"/>
+            <TextBox x:Name="main_timer_dots1"
+                 Grid.Row="1" Grid.Column="1"
+                 Text=":"
+                 CaretBrush="Black"
+                 Template="{StaticResource text_dots_bright}" HorizontalAlignment="Right"/>
+            <TextBox x:Name="main_timer_m"
+                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                 Text="59"
+                 Template="{StaticResource txt_bright}" HorizontalAlignment="Left"/>
+            <TextBox x:Name="main_timer_dots2"
+                 Grid.Row="1" Grid.Column="3"
+                 Text=":"
+                 Template="{StaticResource text_dots_bright }" HorizontalAlignment="Left"/>
+            <TextBox x:Name="main_timer_s"
+                 Grid.Row="1" Grid.Column="4"
+                 Text="59"
+                 Template="{StaticResource txt_bright}" HorizontalAlignment="Right" />
+        </Grid>
         
     </Grid>
 </Window>
