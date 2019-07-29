@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Windows.Threading;
+using System.Media;
 
 namespace timer
 {
@@ -23,8 +24,14 @@ namespace timer
     public partial class MainWindow : Window
     {
         bool is_time_goes = false;
+        bool is_time_watch_goes = false;
+        DateTime current_watch_time;
+        SoundPlayer sp = new SoundPlayer("aliens_game_over2.wav");
+        int sp_tick = 0;
         public MainWindow()
         {
+            sp.Load();
+            
             InitializeComponent();
 
             Button[] btns =
@@ -54,14 +61,20 @@ namespace timer
             btn_tab_1.MouseLeftButtonUp += UiBtnTabClick;
             btn_tab_2.MouseLeftButtonUp += UiBtnTabClick;
 
-            btn_tab_1.Background = new SolidColorBrush(Color.FromRgb(20,202,20));
+            // Watch 
+
+            btn_watch_play.Click += UiBtnWatchPlayClick;
+            btn_watch_pause.Click += UiBtnWatchPauseClick;
+            btn_watch_clear.Click += UiBtnWatchClearClick;
+            current_watch_time = new DateTime(1, 1, 1, 0, 0, 0);
 
             DispatcherTimer Timer = new DispatcherTimer();
             Timer.Tick += new EventHandler(TimerTick);
-            Timer.Interval= new TimeSpan(0, 0, 1);
+            Timer.Interval= new TimeSpan(0, 0, 0, 1);
             Timer.Start();
         }
 
+        // Timer
         void UiBtnTabClick(object sender, RoutedEventArgs args)
         {
             if (Functions.SelectedItem == StopWatch)
@@ -126,6 +139,7 @@ namespace timer
             }
             else
             {
+                sp_tick = 0;
                 TextBox[] txts =
                 {
                 main_timer_s,
@@ -156,7 +170,7 @@ namespace timer
                 // 0:23:56
                 time = new string[]
                 {
-                    t.ToLongTimeString().Substring(0,1),
+                    "0" + t.ToLongTimeString().Substring(0,1),
                     t.ToLongTimeString().Substring(2,2),
                     t.ToLongTimeString().Substring(5,2)
                 };
@@ -179,9 +193,38 @@ namespace timer
             return new DateTime(1, 1, 1, Convert.ToInt32(main_timer_h.Text), Convert.ToInt32(main_timer_m.Text), Convert.ToInt32(main_timer_s.Text));
         }
 
+        bool IsStop()
+        {
+            if (main_timer_s.Text == "00" &&
+                main_timer_m.Text == "00" &&
+                main_timer_h.Text == "00")
+                return true;
+            return false;
+        }
+
+        // Watch
+
+        void UiBtnWatchPlayClick(object sender, RoutedEventArgs args)
+        {
+            if (!is_time_watch_goes)
+                is_time_watch_goes = true;
+        }
+
+        void UiBtnWatchPauseClick(object sender, RoutedEventArgs args)
+        {
+            if (is_time_watch_goes)
+                is_time_watch_goes = false;
+        }
+
+        void UiBtnWatchClearClick(object sender, RoutedEventArgs args)
+        {
+            txt_watch_timer.Text = "00:00:00";
+            is_time_watch_goes = false;
+        }
+
         void TimerTick(object sender, EventArgs e)
         {
-            if (is_time_goes)
+            if (is_time_goes && !IsStop())
             {
                 DateTime current_time = CurrentTimerTime();
                 current_time = current_time.AddSeconds(-1);
@@ -191,6 +234,23 @@ namespace timer
                 main_timer_m.Text = new_time[1];
                 main_timer_s.Text = new_time[2];
             }
+            if (IsStop() && is_time_goes && sp_tick < 3)
+            {
+                sp_tick++;
+                sp.Play();
+            }
+            if (is_time_watch_goes)
+            {
+                current_watch_time = current_watch_time.AddSeconds(1);
+
+                // 01:34:67
+                // 0:23:56
+                if (current_watch_time.ToLongTimeString().Length == 7)
+                    txt_watch_timer.Text = "0" + current_watch_time.ToLongTimeString();
+                else
+                    txt_watch_timer.Text = current_watch_time.ToLongTimeString();
+            }
+
         }
     }
 }

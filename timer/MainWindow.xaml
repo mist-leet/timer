@@ -10,7 +10,7 @@
         <ControlTemplate TargetType="Button" x:Key="btn_bright_time">
             <Border BorderBrush="#FF1E2D40"
                     BorderThickness="7" 
-                    Margin="10,20">
+                    Margin="10,20" Background="#F2F2F2F2">
                 <ContentControl 
                                 Background="#f2f2f2"
                                 FontSize="70"
@@ -19,11 +19,10 @@
                                 Foreground="#FF1E2D40" Content="{TemplateBinding Content}"/>
             </Border>
         </ControlTemplate>
-
         <ControlTemplate TargetType="Button" x:Key="btn_bright_play">
 
             <Border BorderBrush="#FFD99C2B"
-                    BorderThickness="7" Margin="10,20">
+                    BorderThickness="7" Margin="10,20" Background="#F2F2F2F2">
 
                 <Polyline Fill="#FFD99C2B" Points="20,10, 
                                                    75,50,
@@ -31,7 +30,6 @@
             </Border>
 
         </ControlTemplate>
-
         <ControlTemplate TargetType="TextBox" x:Key="txt_bright">
 
             <ContentControl FontSize="210"
@@ -39,34 +37,76 @@
                             VerticalAlignment="Center" HorizontalAlignment="Center"  
                             Foreground="#FF1E2D40"       
                             
-                Content="{TemplateBinding Text}" Margin="0"/>
+                Content="{TemplateBinding Text}" Margin="0" Background="#F2F2F2F2"/>
         </ControlTemplate>
-
         <ControlTemplate TargetType="TextBox" x:Key="text_dots_bright">
             <ContentControl FontSize="210"
                             FontFamily="Roboto"
                             VerticalAlignment="Center" HorizontalAlignment="Center"  
                             Foreground="#FF1E2D40"
-                            Content="{TemplateBinding Text}" AllowDrop="False" />
+                            Content="{TemplateBinding Text}" AllowDrop="False" Background="#F2F2F2F2" />
 
         </ControlTemplate>
-
         <ControlTemplate TargetType="TextBox" x:Key="tabs_bright">
 
             <ContentControl FontSize="40"
                             FontFamily="Roboto"
                             VerticalAlignment="Center" HorizontalAlignment="Center"  
                             Foreground="#FF1E2D40"
-                            Content="{TemplateBinding Text}" AllowDrop="False" />
+                            Content="{TemplateBinding Text}" AllowDrop="False" Background="#F2F2F2F2" />
         </ControlTemplate>
 
+        <!--  -->
+
+        <ControlTemplate TargetType="TextBox" x:Key="txt_watch_bright">
+
+            <ContentControl FontSize="150"
+                            FontFamily="Roboto"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"  
+                            Foreground="#FF1E2D40"       
+                            
+                Content="{TemplateBinding Text}" Margin="0"/>
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn_watch_bright_play">
+
+            <Border BorderBrush="#FFD99C2B"
+                    BorderThickness="7" Margin="10,10" Background="#F2F2F2F2">
+
+                <Polyline Fill="#FFD99C2B" Points="15,15, 
+                                                   15, 59,
+                                                   65,37"/>
+            </Border>
+
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn_watch_bright_pause" >
+            <Border BorderBrush="#FF1E2D40" 
+                    BorderThickness="7" Margin="10,10" Background="#F2F2F2F2">
+                <WrapPanel>
+                    <Rectangle Fill="#FF1E2D40" Width="10" Height="54" Margin="20,10,0,0"/>
+                    <Rectangle Fill="#FF1E2D40" Width="10" Height="54" Margin="14,10,0,0" />
+                </WrapPanel>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn_watch_bright_clear">
+            <Border BorderBrush="#FF1E2D40" Background="#F2F2F2F2"
+                    BorderThickness="7" Margin="10,10">
+                <ContentControl FontSize="60"
+                            FontFamily="Roboto"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"  
+                            Foreground="#FF1E2D40"       
+                            
+                Content="C" Margin="0" FontWeight="Bold"/>
+            </Border>
+        </ControlTemplate>
+
+
     </Window.Resources>
-    <TabControl x:Name="Functions" BorderBrush="{x:Null}" Background="{x:Null}" >
-        <TabItem x:Name="Timer" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
+    <TabControl x:Name="Functions">
+        <TabItem x:Name="Timer" FocusVisualStyle="{x:Null}">
             <TabItem.Header>
                 <StackPanel x:Name="TabPanel1">
                     <TextBox Text="Timer" x:Name="btn_tab_1" 
-                    Template="{StaticResource tabs_bright}" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                     Template="{StaticResource tabs_bright}"/>
                 </StackPanel>
             </TabItem.Header>
             <Grid x:Name="MainGrid">
@@ -132,10 +172,29 @@
         <TabItem x:Name="StopWatch" BorderBrush="{x:Null}">
             <TabItem.Header>
                 <TextBox Text="Stopwatch" x:Name="btn_tab_2" 
-                    Template="{StaticResource tabs_bright}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Background="{x:Null}"/>
+                    Template="{StaticResource tabs_bright}" />
             </TabItem.Header>
             <Grid>
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.6*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.47*"/>
+                    <ColumnDefinition Width="0.47*"/>
+                    <ColumnDefinition Width="0.47*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" x:Name="btn_watch_play"
+                        Template="{StaticResource btn_watch_bright_play}"/>
+                <Button Grid.Column="2" Content="pause" x:Name="btn_watch_pause"
+                        Template="{StaticResource btn_watch_bright_pause}"/>
+                <Button Grid.Column="3" Content="clear" x:Name="btn_watch_clear"
+                        Template="{StaticResource btn_watch_bright_clear}"/>
+                <TextBox Text="23:59:59" Grid.Row="1" Grid.ColumnSpan="5"  x:Name="txt_watch_timer"
+                         Template="{StaticResource txt_watch_bright}"/>
             </Grid>
         </TabItem>
     </TabControl>
